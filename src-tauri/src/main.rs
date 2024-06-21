@@ -10,7 +10,7 @@ use tokio_serial::SerialPortBuilderExt;
 #[derive(Serialize, Deserialize, Debug, Clone)]
 struct LocalState {
     lap: i32,
-    lap_start: i32,
+    lap_start: i64,
     best_lap: i32,
 
     ar_teo_status: DeviceStatus,
@@ -69,7 +69,7 @@ async fn teo_parser<R: Runtime>(
             state.lock().unwrap().lap_start = SystemTime::now()
                 .duration_since(SystemTime::UNIX_EPOCH)
                 .unwrap()
-                .as_secs() as i32;
+                .as_secs() as i64;
         }
 
         println!("State: {:?}", state.lock().unwrap());

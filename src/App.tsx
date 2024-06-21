@@ -1,22 +1,7 @@
 import {useEffect, useState} from "react";
 import {listen} from '@tauri-apps/api/event'
-
-interface TState {
-    lap: number;
-    lap_start: number;
-    best_lap: number;
-    ar_teo_status: string;
-    ar_teo: TArteo;
-}
-
-interface TArteo {
-    rpm: number;
-    speed: number;
-    bat1: number;
-    bat2: number;
-    lap_trigger: number;
-}
-
+import {TState} from "./lib/types.ts";
+import Timer from "./components/timer.tsx";
 
 function App() {
     const [state, setState] = useState<TState>({} as TState);
@@ -33,7 +18,7 @@ function App() {
 
     return (
         <div
-            className='w-screen h-screen bg-black text-white grid grid-cols-[1fr_2fr_1fr] grid-rows-[40px,repeat(4,1fr)]'>
+            className='w-screen h-screen bg-black text-white grid grid-cols-[1fr_2fr_1fr] grid-rows-[40px,repeat(3,1fr)]'>
             <div className="col-span-3 flex items-center px-4 gap-x-12">
                 <span className="text-green-400">Arduino Teo OK</span>
                 <span className="text-green-400">Arduino Teo OK</span>
@@ -42,16 +27,17 @@ function App() {
             </div>
             {/* Last lap */}
             <div className='card-boder flex flex-col items-center justify-center'>
-                <h1 className='text-4xl font-semibold italic'>01:55:37</h1>
+                <Timer unix={1000} fixed />
                 <span className='text-lg mt-1'>last lap</span>
             </div>
             {/* Current lap */}
             <div className='card-boder flex flex-col items-center justify-center'>
-                <h1 className='text-4xl font-semibold italic'>00:43:18</h1>
+                {/*<h1 className='text-4xl font-semibold italic'>00:43:18</h1>*/}
+                <Timer unix={2372041} fixed />
             </div>
             {/* Best lap */}
             <div className='card-boder flex flex-col items-center justify-center'>
-                <h1 className='text-4xl font-semibold italic'>01:32:52</h1>
+                <Timer unix={20000} fixed />
                 <span className='text-lg mt-1'>best lap</span>
             </div>
             {/* Voltage */}
