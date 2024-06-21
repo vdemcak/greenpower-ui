@@ -1,0 +1,17 @@
+@import url("https://use.typekit.net/zsf4cph.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: "termina", sans-serif;
+  }
+}
+
+@layer utilities {
+  .card-boder {
+    @apply border border-white/10;
+  }
+}
